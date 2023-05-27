@@ -23,6 +23,9 @@ update msg =
         App.Msg.NothingHappened ->
             Platform.Extra.noOperation
 
+        App.Msg.ScriptChanged b ->
+            \x -> ( { x | script = b }, Cmd.none )
+
         App.Msg.GenerateRequested ->
             Platform.Extra.noOperation
 
