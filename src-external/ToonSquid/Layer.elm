@@ -5,7 +5,6 @@ import Json.Encode
 
 type Layer
     = SimpleLayer_ SimpleLayer
-    | Text_ Text
     | Background_ Background
 
 
@@ -13,9 +12,6 @@ id : Layer -> String
 id a =
     case a of
         SimpleLayer_ b ->
-            b.id
-
-        Text_ b ->
             b.id
 
         Background_ b ->
@@ -27,9 +23,6 @@ toJson a =
     case a of
         SimpleLayer_ b ->
             simpleLayerToJson b
-
-        Text_ b ->
-            textToJson b
 
         Background_ b ->
             backgroundToJson b
@@ -62,22 +55,6 @@ simpleLayerToJson a =
   }
 }
 """
-
-
-
---
-
-
-type alias Text =
-    { id : String
-    }
-
-
-textToJson : Text -> String
-textToJson _ =
-    """
-    {}
-    """
 
 
 
