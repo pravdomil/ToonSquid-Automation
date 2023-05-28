@@ -159,6 +159,8 @@ type alias Text =
     { id : String
     , name : String
     , text : String
+    , x : Float
+    , y : Float
     }
 
 
@@ -190,7 +192,7 @@ textToJson drawing a =
         "v": 1,
         "k": [
           {
-            "vl": { "i": 0, "vl": 1864.5462646484375, "v": 1, "o": 0 },
+            "vl": { "i": 0, "vl": """ ++ Json.Encode.encode 0 (Json.Encode.float a.x) ++ """, "v": 1, "o": 0 },
             "e": { "md": 2, "tp": 0 },
             "v": 1,
             "f": 0
@@ -204,7 +206,7 @@ textToJson drawing a =
         "v": 1,
         "k": [
           {
-            "vl": { "i": 0, "vl": 909.42254638671875, "v": 1, "o": 0 },
+            "vl": { "i": 0, "vl": """ ++ Json.Encode.encode 0 (Json.Encode.float a.y) ++ """, "v": 1, "o": 0 },
             "e": { "md": 2, "tp": 0 },
             "v": 1,
             "f": 0
