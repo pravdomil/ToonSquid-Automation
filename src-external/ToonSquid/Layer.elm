@@ -123,7 +123,7 @@ drawingToJson layer a =
   "s": """ ++ Json.Encode.encode 0 (Json.Encode.int a.start) ++ """,
   "e": """ ++ Json.Encode.encode 0 (Json.Encode.int a.end) ++ """,
   "l": """ ++ Json.Encode.encode 0 (Json.Encode.string (id layer)) ++ """,
-  "ly": [""" ++ String.join "," (List.map (\x -> Json.Encode.encode 0 (Json.Encode.string (drawingLayerId x))) a.layers) ++ """],
+  "ly": [""" ++ String.join "," (List.map (\x -> Json.Encode.encode 0 (Json.Encode.string (drawingLayerId x))) (List.reverse a.layers)) ++ """],
   "lMD": "2023-05-28T17:43:29Z"
 }
 """
