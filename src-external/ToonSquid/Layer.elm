@@ -100,3 +100,28 @@ backgroundToJson a =
   }
 }
 """
+
+
+
+--
+
+
+type alias Drawing =
+    { id : String
+    , length : Int
+    }
+
+
+drawingToJson : Layer -> Drawing -> String
+drawingToJson layer a =
+    """
+{
+  "v": 3,
+  "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
+  "e": """ ++ Json.Encode.encode 0 (Json.Encode.int a.length) ++ """,
+  "l": """ ++ Json.Encode.encode 0 (Json.Encode.string (id layer)) ++ """,
+  "lMD": "2023-05-28T17:43:29Z",
+  "ly": [],
+  "s": 1
+}
+"""
