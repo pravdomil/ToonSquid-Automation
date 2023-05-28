@@ -54,6 +54,7 @@ toJson a =
     in
     """
 {
+  "v": 3,
   "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
   "re": { "w": 3840, "h": 2160 },
   "rs": {
@@ -107,7 +108,6 @@ toJson a =
     "v": 5,
     "hP": []
   },
-  "mO": 0,
-  "v": 3
+  "mO": 0
 }
 """
