@@ -1,7 +1,7 @@
 module ToonSquid.Animation exposing (..)
 
 import Json.Encode
-import ToonSquid.Element
+import ToonSquid.Layer
 
 
 type alias Animation =
@@ -10,7 +10,7 @@ type alias Animation =
     , width : Int
     , height : Int
     , fps : Int
-    , elements : List ToonSquid.Element.Element
+    , layers : List ToonSquid.Layer.Layer
     }
 
 
@@ -23,8 +23,8 @@ toJson a =
   "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
   "re": """ ++ Json.Encode.encode 0 (Json.Encode.object [ ( "w", Json.Encode.int a.width ), ( "h", Json.Encode.int a.height ) ]) ++ """,
   "fr": """ ++ Json.Encode.encode 0 (Json.Encode.int a.fps) ++ """,
-  "lO":  """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Element.id x)) (List.reverse a.elements)) ++ """,
-  "ly": [""" ++ String.join "," (List.map ToonSquid.Element.toJson a.elements) ++ """],
+  "lO":  """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Layer.id x)) (List.reverse a.layers)) ++ """,
+  "ly": [""" ++ String.join "," (List.map ToonSquid.Layer.toJson a.layers) ++ """],
   "tF": 1,
   "tH": { "v": 1, "r": [], "c": [] },
   "cL": null,
