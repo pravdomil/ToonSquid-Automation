@@ -56,6 +56,7 @@ toJson a =
 {
   "v": 3,
   "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
+  "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
   "re": { "w": 3840, "h": 2160 },
   "rs": {
     "tO": [],
@@ -76,7 +77,6 @@ toJson a =
   "tC": null,
   "fr": 24,
   "sc": [],
-  "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
   "eS": {
     "mT": true,
     "pCS": [],
