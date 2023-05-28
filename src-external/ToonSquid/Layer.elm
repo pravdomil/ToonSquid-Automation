@@ -61,7 +61,7 @@ simpleLayerToJson a =
     "Na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
     "V": 3,
     "LD": "2023-05-28T16:30:53Z",
-    "dr": [],
+    "dr": [""" ++ String.join "," (List.map (\x -> Json.Encode.encode 0 (Json.Encode.string x.id)) a.drawings) ++ """],
     "DI": null
   }
 }
