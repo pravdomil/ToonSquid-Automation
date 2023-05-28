@@ -16,6 +16,20 @@ type alias Animation =
 
 toJson : Animation -> String
 toJson a =
+    let
+        layers : List String
+        layers =
+            List.map ToonSquid.Layer.toJson a.layers
+                ++ List.concatMap
+                    (\x ->
+                        List.concatMap
+                            (\x3 ->
+                                List.map (ToonSquid.Layer.drawingLayerToJson x3) x3.layers
+                            )
+                            (ToonSquid.Layer.drawings x)
+                    )
+                    a.layers
+    in
     """
 {
   "v": 5,
@@ -24,7 +38,7 @@ toJson a =
   "re": """ ++ Json.Encode.encode 0 (Json.Encode.object [ ( "w", Json.Encode.int a.width ), ( "h", Json.Encode.int a.height ) ]) ++ """,
   "fr": """ ++ Json.Encode.encode 0 (Json.Encode.int a.fps) ++ """,
   "lO": """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Layer.id x)) (List.reverse a.layers)) ++ """,
-  "ly": [""" ++ String.join "," (List.map ToonSquid.Layer.toJson a.layers) ++ """],
+  "ly": [""" ++ String.join "," layers ++ """],
   "tF": 1,
   "tH": { "v": 1, "r": [], "c": [] },
   "cL": null,
