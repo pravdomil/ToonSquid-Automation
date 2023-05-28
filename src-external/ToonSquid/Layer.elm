@@ -45,6 +45,7 @@ toJson a =
 type alias SimpleLayer =
     { id : String
     , name : String
+    , drawings : List Drawing
     }
 
 
