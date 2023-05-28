@@ -18,6 +18,16 @@ id a =
             b.id
 
 
+drawings : Layer -> List Drawing
+drawings a =
+    case a of
+        SimpleLayer_ b ->
+            b.drawings
+
+        Background_ _ ->
+            []
+
+
 toJson : Layer -> String
 toJson a =
     case a of
