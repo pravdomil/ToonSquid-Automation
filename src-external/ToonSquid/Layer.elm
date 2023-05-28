@@ -108,7 +108,8 @@ backgroundToJson a =
 
 type alias Drawing =
     { id : String
-    , length : Int
+    , start : Int
+    , end : Int
     , layers : List DrawingLayer
     }
 
@@ -119,11 +120,11 @@ drawingToJson layer a =
 {
   "v": 3,
   "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
-  "e": """ ++ Json.Encode.encode 0 (Json.Encode.int a.length) ++ """,
+  "s": """ ++ Json.Encode.encode 0 (Json.Encode.int a.start) ++ """,
+  "e": """ ++ Json.Encode.encode 0 (Json.Encode.int a.end) ++ """,
   "l": """ ++ Json.Encode.encode 0 (Json.Encode.string (id layer)) ++ """,
-  "lMD": "2023-05-28T17:43:29Z",
   "ly": [""" ++ String.join "," (List.map (\x -> Json.Encode.encode 0 (Json.Encode.string (drawingLayerId x))) a.layers) ++ """],
-  "s": 1
+  "lMD": "2023-05-28T17:43:29Z"
 }
 """
 
