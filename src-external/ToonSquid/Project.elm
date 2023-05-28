@@ -12,6 +12,9 @@ import Zip.Entry
 type alias Project =
     { id : String
     , name : String
+    , width : Int
+    , height : Int
+    , fps : Int
     , animations : List ToonSquid.Animation.Animation
     }
 
@@ -57,7 +60,8 @@ toJson a =
   "v": 3,
   "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
   "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
-  "re": { "w": 3840, "h": 2160 },
+  "re": """ ++ Json.Encode.encode 0 (Json.Encode.object [ ( "w", Json.Encode.int a.width ), ( "h", Json.Encode.int a.height ) ]) ++ """,
+  "fr": """ ++ Json.Encode.encode 0 (Json.Encode.int a.fps) ++ """,
   "rs": {
     "tO": [],
     "dRI": [],
@@ -75,7 +79,6 @@ toJson a =
   "oD": "2023-05-28T16:30:48Z",
   "cD": "2023-05-28T16:30:48Z",
   "tC": null,
-  "fr": 24,
   "sc": [],
   "eS": {
     "mT": true,
