@@ -30,7 +30,13 @@ update msg =
             \x -> ( { x | script = b }, Cmd.none )
 
         App.Msg.GenerateRequested ->
-            \x -> ( x, File.Download.bytes "Project.tsproj" "application/zip" (ToonSquid.Project.toBytes (App.Model.Utils.modelToProject x)) )
+            \x ->
+                let
+                    project : ToonSquid.Project.Project
+                    project =
+                        App.Model.Utils.modelToProject x
+                in
+                ( x, File.Download.bytes (project.name ++ ".tsproj") "application/zip" (ToonSquid.Project.toBytes project) )
 
 
 
