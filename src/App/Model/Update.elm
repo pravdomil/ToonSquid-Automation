@@ -1,14 +1,12 @@
 module App.Model.Update exposing (..)
 
 import App.Model
+import App.Model.Utils
 import App.Msg
-import Bytes.Encode
 import File.Download
 import Json.Decode
 import Platform.Extra
-import Time
-import Zip
-import Zip.Entry
+import ToonSquid.Project
 
 
 init : Json.Decode.Value -> ( App.Model.Model, Cmd App.Msg.Msg )
@@ -32,27 +30,7 @@ update msg =
             \x -> ( { x | script = b }, Cmd.none )
 
         App.Msg.GenerateRequested ->
-            \x -> ( x, generate x.script )
-
-
-generate : String -> Cmd msg
-generate a =
-    let
-        basePath : String
-        basePath =
-            "DAEBDB18-07DF-46CD-A696-2272B174ABAE/"
-    in
-    Zip.fromEntries
-        [ Zip.Entry.store
-            (Zip.Entry.Meta
-                (basePath ++ "data")
-                ( Time.customZone 0 [], Time.millisToPosix 1685220000 )
-                Nothing
-            )
-            (Bytes.Encode.encode (Bytes.Encode.string a))
-        ]
-        |> Zip.toBytes
-        |> File.Download.bytes "Project.tsproj" "application/zip"
+            \x -> ( x, File.Download.bytes "Project.tsproj" "application/zip" (ToonSquid.Project.toBytes (App.Model.Utils.modelToProject x)) )
 
 
 
