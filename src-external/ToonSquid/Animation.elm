@@ -1,10 +1,13 @@
 module ToonSquid.Animation exposing (..)
 
 import Json.Encode
+import ToonSquid.Element
 
 
 type alias Animation =
     { id : String
+    , name : String
+    , elements : List ToonSquid.Element.Element
     }
 
 
@@ -15,7 +18,7 @@ toJson a =
   "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
   "tF": 1,
   "re": { "w": 3840, "h": 2160 },
-  "lO": ["C01FE01D-1201-4312-BF86-F1A1386D66E2", "73296017-F838-4114-B2B4-1729329B3E7A"],
+  "lO":  """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Element.id x)) a.elements) ++ """,
   "ly": [
     {
       "v": 1,
@@ -53,7 +56,7 @@ toJson a =
   "fr": 24,
   "tH": { "v": 1, "r": [], "c": [] },
   "cL": null,
-  "na": "Unnamed",
+  "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
   "dr": [],
   "ma": [],
   "cD": "2023-05-28T16:30:53Z",
