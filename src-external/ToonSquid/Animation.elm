@@ -23,7 +23,7 @@ toJson a =
   "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
   "re": """ ++ Json.Encode.encode 0 (Json.Encode.object [ ( "w", Json.Encode.int a.width ), ( "h", Json.Encode.int a.height ) ]) ++ """,
   "fr": """ ++ Json.Encode.encode 0 (Json.Encode.int a.fps) ++ """,
-  "lO":  """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Layer.id x)) (List.reverse a.layers)) ++ """,
+  "lO": """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Layer.id x)) (List.reverse a.layers)) ++ """,
   "ly": [""" ++ String.join "," (List.map ToonSquid.Layer.toJson a.layers) ++ """],
   "tF": 1,
   "tH": { "v": 1, "r": [], "c": [] },
