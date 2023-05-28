@@ -11,6 +11,7 @@ import Zip.Entry
 
 type alias Project =
     { id : String
+    , name : String
     , animations : List ToonSquid.Animation.Animation
     }
 
@@ -73,7 +74,7 @@ toJson a =
   "tC": null,
   "fr": 24,
   "sc": [],
-  "na": "Unnamed",
+  "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
   "eS": {
     "mT": true,
     "pCS": [],
