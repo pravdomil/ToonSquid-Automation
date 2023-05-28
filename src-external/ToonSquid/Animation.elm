@@ -28,7 +28,7 @@ toJson a =
   "tF": 1,
   "tH": { "v": 1, "r": [], "c": [] },
   "cL": null,
-  "dr": [],
+  "dr": [""" ++ String.join "," (List.concatMap (\x -> List.map (ToonSquid.Layer.drawingToJson x) (ToonSquid.Layer.drawings x)) a.layers) ++ """],
   "ma": [],
   "lMD": "2023-05-28T16:30:53Z",
   "cD": "2023-05-28T16:30:53Z"
