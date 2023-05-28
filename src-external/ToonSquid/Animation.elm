@@ -7,6 +7,9 @@ import ToonSquid.Element
 type alias Animation =
     { id : String
     , name : String
+    , width : Int
+    , height : Int
+    , fps : Int
     , elements : List ToonSquid.Element.Element
     }
 
@@ -18,8 +21,8 @@ toJson a =
   "v": 5,
   "id": """ ++ Json.Encode.encode 0 (Json.Encode.string a.id) ++ """,
   "na": """ ++ Json.Encode.encode 0 (Json.Encode.string a.name) ++ """,
-  "re": { "w": 3840, "h": 2160 },
-  "fr": 24,
+  "re": """ ++ Json.Encode.encode 0 (Json.Encode.object [ ( "w", Json.Encode.int a.width ), ( "h", Json.Encode.int a.height ) ]) ++ """,
+  "fr": """ ++ Json.Encode.encode 0 (Json.Encode.int a.fps) ++ """,
   "lO":  """ ++ Json.Encode.encode 0 (Json.Encode.list (\x -> Json.Encode.string (ToonSquid.Element.id x)) (List.reverse a.elements)) ++ """,
   "ly": [""" ++ String.join "," (List.map ToonSquid.Element.toJson a.elements) ++ """],
   "tF": 1,
