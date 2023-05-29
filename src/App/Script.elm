@@ -8,10 +8,12 @@ type alias Script =
     }
 
 
-fromString : String -> List Scene
+fromString : String -> Script
 fromString a =
-    String.split "\n" a
-        |> List.map stringToScene
+    Script
+        (String.split "\n" a
+            |> List.map stringToScene
+        )
 
 
 
