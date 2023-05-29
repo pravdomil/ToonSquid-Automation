@@ -65,6 +65,54 @@ modelToProject model =
 --
 
 
+scriptToDrawings : Random.Seed -> App.Script.Script -> List ToonSquid.Layer.Drawing
+scriptToDrawings initialSeed a =
+    let
+        sceneToDrawing : Random.Seed -> Int -> App.Script.Scene -> ToonSquid.Layer.Drawing
+        sceneToDrawing seed time b =
+            let
+                ( drawingId, textId ) =
+                    Random.step (Random.map2 Tuple.pair UUID.generator UUID.generator) seed |> Tuple.first
+            in
+            ToonSquid.Layer.Drawing
+                (UUID.toString drawingId)
+                time
+                (time + max 1 (round (Maybe.withDefault 1 b.length * fps)))
+                [ ToonSquid.Layer.Text_
+                    (ToonSquid.Layer.Text
+                        (UUID.toString textId)
+                        "Text"
+                        b.text
+                        200
+                        200
+                    )
+                ]
+    in
+    List.foldl
+        (\x ( acc, time, seed ) ->
+            let
+                drawing : ToonSquid.Layer.Drawing
+                drawing =
+                    sceneToDrawing seed time x
+            in
+            ( drawing :: acc
+            , drawing.end + 1
+            , Random.step Random.independentSeed seed |> Tuple.first
+            )
+        )
+        ( []
+        , 1
+        , initialSeed
+        )
+        a.scenes
+        |> (\( x, _, _ ) -> x)
+        |> List.reverse
+
+
+
+--
+
+
 width =
     3840
 
