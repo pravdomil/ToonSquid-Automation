@@ -15,6 +15,7 @@ init : Json.Decode.Value -> ( App.Model.Model, Cmd App.Msg.Msg )
 init _ =
     ( App.Model.Model
         (Time.millisToPosix 1685355000)
+        "Chapter 1"
         "786 Hello\n983 Word"
     , Time.now |> Task.perform App.Msg.TimeReceived
     )
@@ -32,6 +33,9 @@ update msg =
 
         App.Msg.TimeReceived b ->
             \x -> ( { x | time = b }, Cmd.none )
+
+        App.Msg.NameChanged b ->
+            \x -> ( { x | name = b }, Cmd.none )
 
         App.Msg.ScriptChanged b ->
             \x -> ( { x | script = b }, Cmd.none )
