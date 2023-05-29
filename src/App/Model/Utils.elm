@@ -83,7 +83,7 @@ scriptToDrawings initialSeed a =
                         (UUID.toString textId)
                         "Text"
                         b.text
-                        200
+                        300
                         200
                     )
                 ]
