@@ -35,8 +35,15 @@ viewBody model =
                 , onPress = Just App.Msg.GenerateRequested
                 }
             ]
+        , inputText theme
+            [ spacing 4 ]
+            { label = Element.Input.labelAbove [] (text "Name")
+            , placeholder = Nothing
+            , text = model.name
+            , onChange = App.Msg.NameChanged
+            }
         , inputMultiline theme
-            []
+            [ spacing 4 ]
             { label = Element.Input.labelAbove [] (text "Script")
             , placeholder = Nothing
             , text = model.script
