@@ -83,8 +83,9 @@ scriptToDrawings initialSeed a =
                         (UUID.toString textId)
                         "Text"
                         b.text
-                        300
-                        200
+                        48
+                        (160 + 16)
+                        (height + 48 + 32)
                     )
                 ]
     in
