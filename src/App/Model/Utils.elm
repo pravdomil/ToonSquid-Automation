@@ -41,7 +41,7 @@ modelToProject model =
         animation =
             ToonSquid.Animation.Animation
                 animationId
-                "Automation"
+                model.name
                 width
                 height
                 fps
@@ -53,7 +53,7 @@ modelToProject model =
     in
     ToonSquid.Project.Project
         projectId
-        "Automation"
+        model.name
         width
         height
         fps
