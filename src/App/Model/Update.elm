@@ -16,7 +16,7 @@ init _ =
     ( App.Model.Model
         (Time.millisToPosix 1685355000)
         "Chapter 1"
-        "786 Hello\n983 Word"
+        "100 Hello\n100 Word"
     , Time.now |> Task.perform App.Msg.TimeReceived
     )
 
