@@ -1,6 +1,9 @@
 module App.Model exposing (..)
 
+import Time
+
 
 type alias Model =
-    { script : String
+    { time : Time.Posix
+    , script : String
     }

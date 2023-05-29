@@ -6,13 +6,17 @@ import App.Msg
 import File.Download
 import Json.Decode
 import Platform.Extra
+import Task
+import Time
 import ToonSquid.Project
 
 
 init : Json.Decode.Value -> ( App.Model.Model, Cmd App.Msg.Msg )
 init _ =
-    ( App.Model.Model "786 Hello\n983 Word"
-    , Cmd.none
+    ( App.Model.Model
+        (Time.millisToPosix 1685355000)
+        "786 Hello\n983 Word"
+    , Time.now |> Task.perform App.Msg.TimeReceived
     )
 
 
@@ -25,6 +29,9 @@ update msg =
     case msg of
         App.Msg.NothingHappened ->
             Platform.Extra.noOperation
+
+        App.Msg.TimeReceived b ->
+            \x -> ( { x | time = b }, Cmd.none )
 
         App.Msg.ScriptChanged b ->
             \x -> ( { x | script = b }, Cmd.none )
